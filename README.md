@@ -1,39 +1,24 @@
-# PlusLib
-Software library for data acquisition, pre-processing, and calibration for navigated image-guided interventions. See more information at [PlusToolkit.org](http://www.plustoolkit.org).
+# PlusLib Fork for SystoleOS
 
-## Bugs
-Please file an issue report over at https://github.com/PlusToolkit/PlusLib/issues.
+**Note:** This is not the official [PlusLib](https://github.com/PlusToolkit/PlusLib) repository. This fork exists for the development and maintenance of PlusLib features and enhancements used in the SystoleOS project, with a particular focus on packaging PlusLib in Systole with minimal divergence.
 
-## Questions
-Please start a discussion at https://github.com/PlusToolkit/PlusLib/discussions.
+## Purpose
 
-## Documentation
-- [PlusLib API documentation](http://perk-software.cs.queensu.ca/plus/doc/nightly/dev/): generated nightly from the latest code version.
-- [Plus devices](https://plustoolkit.github.io/devicecode): description of the steps requires to implement a new device interface.
-- Notepad++ log file syntax highlighting is available via [this user-defined language](https://plustoolkit.github.io/files/PlusLog_NotepadPP_Language.xml).
+The purpose of this fork is to facilitate the integration and packaging of PlusLib into SystoleOS and to provide a platform for SystoleOS-specific development. This repository also serves as an instrument for contributing back to the main PlusLib project, fostering a collaborative environment between the SystoleOS and PlusLib communities. The `master` branch in this repository is kept in high synchronization with the official PlusLib `master` branch.
 
-## Testing dashboards
+## Branches
 
-- [PlusLib dashboard](http://perkdata.cs.queensu.ca/CDash/index.php?project=PlusLib): results of automatic tests of the Plus library
-- [PlusApp dashboard](http://perkdata.cs.queensu.ca/CDash/index.php?project=PlusApp): results of automatic tests of the Plus applications
+This repository contains the following branches:
 
+- `master`: The master branch, synced with the official PlusLib `master` branch.
+- `Systole-patches/PlusLib`: The branch for the PlusLib library, used for SystoleOS development, maintenance, and packaging.
 
-## Build instructions
+## Collaboration
 
-Plus library files and all required libraries and toolkits are automatically downloaded, configured, and built using CMake "superbuild" method (using CMake external project infrastructure). Build instructions are available in [PlusBuild repository](https://github.com/PlusToolkit/PlusBuild/blob/master/README.md).
+We encourage collaboration and contribution from both the SystoleOS and PlusLib communities. This repository aims to facilitate the exchange of ideas, improvements, and bug fixes between both projects. If you have a contribution or a suggestion, please feel free to open an issue or submit a pull request.
 
-Supported platforms:
-- 32/64-bit builds: Plus can be built in either 32-bit or 64-bit mode. 64-bit applications have the advantage of larger available memory space (which is useful for certain applications, such as recording a large number of frames in memory, or reconstructing high-resolution volumes), but only a few hardware devices have 64-bit compatible drivers. If available memory is not a concern &nbsp;then use only 32-bit builds. If lots of memory is needed, and the application does not have to use tracking or imaging hardware devices directly then 64-bit build of Plus can be used. If both hardware support and lots of memory is needed then a 32-bit build of Plus can be used for data acquisition and the acquired data can be passed on to a 64-bit Plus or other application for further processing.
-- Windows 7 32-bit/64-bit, Windows 10 32-bit/64-bit, Windows XP 32-bit embedded, Ubuntu 16.04, and MacOSX operating systems are fully supported and regularly tested.
-- Running on Linux and MacOS: Unfortunately, many of the drivers written for devices are Windows specific, and thus capture cannot be done on a Linux or MacOSX machine. It is recommended to do the data acquisition on Windows and stream the acquired data to the Linux or MacOS computer for further processing.
+When contributing to this repository, please follow the same [contribution guidelines](https://github.com/PlusToolkit/PlusLib/blob/master/CONTRIBUTING.md) established by the official PlusLib project to ensure consistency and quality.
 
-## Contributing
+## Acknowledgements
 
-We follow the standard [GitHub Flow](https://guides.github.com/introduction/flow/) process. In short: send a pull request with proposed changes. See more information [here](https://github.com/PlusToolkit/PlusLib/blob/master/CONTRIBUTING.md).
-
-When making code changes, please follow Plus coding conventions. The Astyle formatter can be used to quickly format a file to Plus standards.
-* [PLUS format](https://github.com/PlusToolkit/PlusLib/blob/master/.astylerc)
-
-## License
-
-Plus has a BSD-style license, which allows any kind of use for free. See more details [here](https://github.com/PlusToolkit/PlusLib/blob/master/License.txt).
+We would like to express our gratitude to the PlusLib community for their dedication and hard work in creating and maintaining the PlusLib project. We also acknowledge the support from Oslo University Hospital and The Norwegian University of Science and Technology, which has made this project possible. We look forward to working together and contributing to the ongoing success and growth of the PlusLib ecosystem.
