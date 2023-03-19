@@ -1,0 +1,56 @@
+name: Sync PlusLib with Systole-patches/PlusLib
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run daily at midnight
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.email "sync-action@example.com"
+          git config --global user.name "Sync Action"
+
+      - name: Setup GitHub CLI
+        run: |
+          gh --version
+          echo "${{ secrets.GH_TOKEN }}" | gh auth login --with-token
+
+      - name: Sync branches and create PRs
+        run: |
+          branches=("master" "Systole-patches/PlusLib")
+
+          git remote add upstream https://github.com/PlusToolkit/PlusLib.git
+          git fetch upstream
+
+          for branch in "${branches[@]}"; do
+            echo "Updating branch $branch..."
+            sync_branch="sync-$(echo $branch | tr '/' '_')"
+
+            git checkout -B $sync_branch $branch
+            git rebase upstream/master
+
+            conflict=$(git diff --name-only --diff-filter=U)
+            if [ -z "$conflict" ]; then
+              git push -f origin $sync_branch:$branch
+            else
+              git checkout $sync_branch
+              git rebase --abort
+              git reset --hard
+
+              existing_pr=$(gh pr list --state=open --author=sync-action --search="Sync $branch with PlusLib master" --json number -q '.[0].number')
+              if [ -n "$existing_pr" ]; then
+                gh pr update $existing_pr --base $branch --head $sync_branch --body ""
+              else
+                gh pr create --title "Sync $branch with PlusLib master" --base $branch --head $sync_branch --body "" --draft=false
+              fi
+            fi
+          done
