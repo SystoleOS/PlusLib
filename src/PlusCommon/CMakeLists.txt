@@ -25,6 +25,7 @@ SET(${PROJECT_NAME}_HDRS
   )
 
 FIND_PACKAGE(IGSIO REQUIRED)
+FIND_PACKAGE(vtkAddon REQUIRED)
 SET(${PROJECT_NAME}_INCLUDE_DIRS
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_BINARY_DIR}
@@ -32,17 +33,18 @@ SET(${PROJECT_NAME}_INCLUDE_DIRS
   ${VTKIGSIOCOMMON_INCLUDE_DIRS}
   ${VTKSEQUENCEIO_INCLUDE_DIRS}
   ${OpenIGTLink_INCLUDE_DIRS}
+  ${vtkAddon_INCLUDE_DIRS}
   CACHE INTERNAL "" FORCE)
 
-# If igtlioConverter was compiled as a static library, we do not need igtlio in the install configuration
-GET_PROPERTY(IGTLIO_LIB_TYPE TARGET igtlioConverter PROPERTY STATIC_LIBRARY_FLAGS)
-IF(NOT IGTLIO_LIB_TYPE STREQUAL "STATIC_LIBRARY")
-  SET(OPENIGTLINKIO_CONFIG_CODE [=[
-    IF(NOT DEFINED OpenIGTLinkIO_DIR)
-      SET(OpenIGTLinkIO_DIR "@OpenIGTLinkIO_DIR@")
-    ENDIF()
-    FIND_PACKAGE(OpenIGTLinkIO NO_MODULE REQUIRED)]=])
-ENDIF()
+# # If igtlioConverter was compiled as a static library, we do not need igtlio in the install configuration
+# GET_PROPERTY(IGTLIO_LIB_TYPE TARGET igtlioConverter PROPERTY STATIC_LIBRARY_FLAGS)
+# IF(NOT IGTLIO_LIB_TYPE STREQUAL "STATIC_LIBRARY")
+#   SET(OPENIGTLINKIO_CONFIG_CODE [=[
+#     IF(NOT DEFINED OpenIGTLinkIO_DIR)
+#       SET(OpenIGTLinkIO_DIR "@OpenIGTLinkIO_DIR@")
+#     ENDIF()
+#     FIND_PACKAGE(OpenIGTLinkIO NO_MODULE REQUIRED)]=])
+# ENDIF()
 
 # --------------------------------------------------------------------------
 # Build the library

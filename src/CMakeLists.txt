@@ -1,6 +1,6 @@
 # --------------------------------------------------------------------------
 # Try to find VTK and include its settings (otherwise complain)
-FIND_PACKAGE(VTK NO_MODULE REQUIRED PATHS ${VTK_DIR} NO_DEFAULT_PATH)
+FIND_PACKAGE(VTK NO_MODULE REQUIRED)
 
 IF(VTK_VERSION VERSION_LESS 8.9.0)
   INCLUDE(${VTK_USE_FILE})
@@ -14,9 +14,11 @@ ENDIF()
 
 # --------------------------------------------------------------------------
 # Determine if rendering is enabled in VTK
-SET(PLUS_RENDERING_ENABLED ON)
-IF (VTK_RENDERING_BACKEND STREQUAL None)
-  SET(PLUS_RENDERING_ENABLED OFF)
+IF(NOT DEFINED PLUS_RENDERING_ENABLED)
+  SET(PLUS_RENDERING_ENABLED ON)
+  IF (VTK_RENDERING_BACKEND STREQUAL None)
+    SET(PLUS_RENDERING_ENABLED OFF)
+  ENDIF()
 ENDIF()
 
 # --------------------------------------------------------------------------

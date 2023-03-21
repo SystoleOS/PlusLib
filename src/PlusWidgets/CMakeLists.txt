@@ -81,6 +81,12 @@ LIST(REMOVE_DUPLICATES PLUSLIB_DEPENDENCIES)
 # Add this variable to UsePlusLib.cmake.in INCLUDE_PLUSLIB_MS_PROJECTS macro
 SET(vcProj_${PROJECT_NAME} ${PROJECT_NAME};${PlusLib_BINARY_DIR}/src/PlusWidgets/${PROJECT_NAME}.vcxproj CACHE INTERNAL "" FORCE)
 
+# NOTE: This is added here so these files are installed by the macro
+list(APPEND ${PROJECT_NAME}_HDRS
+  ${CMAKE_CURRENT_BINARY_DIR}/PlusWidgets_autogen/include/ui_QPlusDeviceSetSelectorWidget.h
+  ${CMAKE_CURRENT_BINARY_DIR}/PlusWidgets_autogen/include/ui_QPlusConfigFileSaverDialog.h
+)
+
 # --------------------------------------------------------------------------
 # Install
 #

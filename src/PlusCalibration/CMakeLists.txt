@@ -140,7 +140,7 @@ IF(PLUSBUILD_BUILD_PlusLib_TOOLS)
   # Link the executable to the algo library.
   TARGET_LINK_LIBRARIES( ConvertFcsvToXml
     vtk${PROJECT_NAME}
-    ITKCommon
+    ${ITK_LIBRARIES}
     vtkPlusDataCollection
     )
 
@@ -152,20 +152,29 @@ IF(PLUSBUILD_BUILD_PlusLib_TOOLS)
   # Link the executable to the algo library.
   TARGET_LINK_LIBRARIES( ConvertXmlToFcsv
     vtk${PROJECT_NAME}
-    ITKCommon
+    ${ITK_LIBRARIES}
     vtkPlusDataCollection
     )
 
   #--------------------------------------------------------------------------------------------
   ADD_EXECUTABLE(TemporalCalibration Tools/TemporalCalibration.cxx)
   SET_TARGET_PROPERTIES(TemporalCalibration PROPERTIES FOLDER Tools)
-  TARGET_LINK_LIBRARIES(TemporalCalibration vtkPlusCommon vtk${PROJECT_NAME} vtkPlusDataCollection)
+  TARGET_LINK_LIBRARIES(TemporalCalibration
+    vtkPlusCommon
+    vtk${PROJECT_NAME}
+    vtkPlusDataCollection
+    ${ITK_LIBRARIES})
   GENERATE_HELP_DOC(TemporalCalibration)
 
   #--------------------------------------------------------------------------------------------
   ADD_EXECUTABLE(ProbeCalibration Tools/ProbeCalibration.cxx)
   SET_TARGET_PROPERTIES(ProbeCalibration PROPERTIES FOLDER Tools)
-  TARGET_LINK_LIBRARIES(ProbeCalibration itkvnl itkvnl_algo vtk${PROJECT_NAME} vtkPlusDataCollection )
+  TARGET_LINK_LIBRARIES(ProbeCalibration
+    itkvnl
+    itkvnl_algo
+    vtk${PROJECT_NAME}
+    vtkPlusDataCollection
+    ${ITK_LIBRARIES})
   GENERATE_HELP_DOC(ProbeCalibration)
 
   INSTALL(
