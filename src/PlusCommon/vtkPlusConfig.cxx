@@ -27,7 +27,6 @@
 #include <mach-o/dyld.h>
 #endif
 
-static const char APPLICATION_CONFIGURATION_FILE_NAME[] = "PlusConfig.xml";
 
 
 vtkPlusConfig* vtkPlusConfig::Instance = NULL;
@@ -359,7 +358,7 @@ PlusStatus vtkPlusConfig::LoadApplicationConfiguration()
 #elif __APPLE__
     this->SetEditorApplicationExecutable("TextEdit");
 #endif
-    saveNeeded = true;
+    // saveNeeded = true;
   }
 
   // Read output directory

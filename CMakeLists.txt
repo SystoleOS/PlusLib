@@ -30,6 +30,11 @@ SET(PLUSLIB_ARCHIVE_INSTALL "${CMAKE_INSTALL_LIBDIR}")
 SET(PLUSLIB_SHARE_INSTALL "${CMAKE_INSTALL_DATAROOTDIR}/${PLUSLIB_INSTALL_FOLDERNAME}")
 SET(PLUSLIB_DATA_INSTALL "${PLUSLIB_SHARE_INSTALL}/data")
 SET(PLUSLIB_CMAKE_INSTALL "${PLUSLIB_SHARE_INSTALL}/cmake")
+# NOTE: I think this should not be necessary. This configuration file is provided by PlusApp, for which PlusLib is a dependency
+# A solution for this could be have a zero default configuration file and let PlusApp deal with setting a default configuration file.
+IF(NOT DEFINED PLUSLIB_APPLICATION_DEFAULT_CONFIG_FILE)
+  SET(PLUSLIB_APPLICATION_DEFAULT_CONFIG_FILE "PlusConfig.xml")
+ENDIF()
 
 # Use solution folders.
 IF(MSVC OR ${CMAKE_GENERATOR} MATCHES "Xcode")

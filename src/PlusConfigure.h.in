@@ -145,6 +145,8 @@
 
 #cmakedefine PLUS_RENDERING_ENABLED
 
+static const char APPLICATION_CONFIGURATION_FILE_NAME[] = "@PLUSLIB_APPLICATION_DEFAULT_CONFIG_FILE@";
+
 // Frequently needed STL includes
 #include <sstream>
 #include <iostream>
